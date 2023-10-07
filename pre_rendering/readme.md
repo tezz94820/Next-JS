@@ -135,3 +135,11 @@ Important things to remember after build
 
 ![](images/img_27.png)
 ![](images/img_28.png)
+
+1. whenever the use is requesting for some page the page is fetching data from ecternal api and complte page is created at server side. Use this if necessary.
+2. getServerSideProps() fucntion is used same as getStaticProps() .
+
+# getServerSideProps
+
+![](images/img_29.png)
+![](images/img_30.png)
