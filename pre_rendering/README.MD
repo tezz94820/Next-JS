@@ -100,4 +100,38 @@ Important things to remember after build
 
 ![](images/img_19.png)
 
-# Something New
+# issues with static Site generation
+
+![](images/img_20.png)
+
+1. The issue is it is static /stale data . lets say we are building a ecommerce app . here at the build time item-1 has price20 dollar and we build the app . now the price is locked . that means a html for theat item is created . so it cannot be changed later . you need to build the entire app again.
+2. To solve this problem we need a way to only change the html of the page which we want to change and not the entire app pages.
+3. The answer to this question is **Incremental Static Generation**.
+
+![](images/img_21.png)
+
+
+# Incremental Static Generation
+
+1. To do this we need to pass another property in the returning object og getStaticProps function. let's say we set the revalidate to 10 seconds.
+2. Now at the intial build the product price is $100 but after after 5 seconds we changed the price to $150 but still for 10 seconds the user will get $100 as the price of product.
+3. After 10 seonds if any person-1 searches for that product , getStaticProps function is run and the product price is updated.
+4. Imp :- remember even though person-1 searches for that product after 10 seconds the price is still old one . A request is sent for page regeration.so after person-1 anyperson will search for that page will get the update product priece.
+![](images/img_22.png)
+5. So it is very clear that it is not like after every 10 seconds the page regeneration is hapenning.
+6. page regeneration is happening only when some user searches for it even after revalidation time.
+![](images/img_23.png)
+7. Code Example
+
+![](images/img_24.png)
+
+
+# Problems with Static Generation
+![](images/img_25.png)
+![](images/img_26.png)
+
+
+# Server Side Rendering (SSR)
+
+![](images/img_27.png)
+![](images/img_28.png)
