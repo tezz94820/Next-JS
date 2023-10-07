@@ -58,3 +58,46 @@ Important things to remember after build
 ![](images/img_11.png)
 ![Alt text](images/img_12.png)
 ![Alt text](images/img_13.png)
+
+# static site rendering with dynamic parameter (posts)
+1. Here we made a /posts route which have all the posts. on clicking on one of the post we can go to specific post.
+2. here we rendered only 3 posts. even inside  getStaticprops() function we can access the postid using content.params.
+## getStaticPaths() [postId]
+3. Now postId can be anything 1,2,,10390232 . But nextjs says that it should know what can be possible values of postId. so, **getStaticPaths()** function is defined which defines what can be possible values of postId.
+# What happens after build ?
+4. If we directly call /posts/1 we will be directly given the pre-rendered html page from the server.
+5. But lets's see what happen when we click indiwual posts in /posts.
+6. when /posts is loaded it automatically loads data of 1,2,3 postId in the form oof json and then run internal js function to add elements in DOM . so this is client side routing and html is prepared at the client side . whereas in the first case html was prepared by the server.
+
+# fallback in getStaticPaths() :- True,false,blocking
+
+## **1. when fallback is false**
+![](images/img_14.png)
+
+    1. html is prepared at build time for specified postid in getstaticPaths() function.
+    2. if postid is not predefinde then it would result in 404.
+
+![](images/img_15.png)
+
+## **2. when fallback is true**
+
+![](images/img_16.png)
+
+1. so if fallback is true then it will not return 404 no found page when postid is not in getstaticpaths. it will return a component which we will set in page.by using router.isFallback
+2. so if there are 3 postid's in the getStaticPaths . then html files of 1,2,3 will be prepared at the build time.
+3. But when the user searches for posts/4 then no such html exists then it checks fallback which is set to true therefore it shows the ballback compoennt where here it is "...loading" . After showing that nextjs internally calls getastaticProps and fetch postid-4 and prepares html and json . and after shoing fallback component it shows the real page for posts/4.
+4. now if next time posts/4 is searched the same html is returned becausse nextjs also saves the html file which is newly created.
+
+![](images/img_17.png)
+
+
+## **3. when fallback is 'blocking'**
+
+![](images/img_18.png)
+
+
+1. so this is just similar to fallback-true . just the difference is whenever a new posts /posts/4 is searched it calls the getStaticProps and makes a html for post-4 and then return it. here no fallback state is created so no loading will be observed . So the difference is in true first loading is observed and then real content but in blocking directly real content is shown.
+
+![](images/img_19.png)
+
+# Something New

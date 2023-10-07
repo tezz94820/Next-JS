@@ -9,7 +9,9 @@ export default function Home() {
     <>
       <h1>Next-JS pre-rendering pages</h1>
       <br />
-      <Link href='/users'>navigate to User list </Link>
+      <Link href='/users'>navigate to User list </Link><br />
+      <Link href='/posts'>navigate to Posts </Link>
+
     </>
   )
 }
