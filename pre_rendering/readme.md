@@ -143,3 +143,27 @@ Important things to remember after build
 
 ![](images/img_29.png)
 ![](images/img_30.png)
+
+# context inside getServerSideProps() function 
+1. params , req, quey , res varoius properties can be extracted from it.
+![](images/img_31.png)
+
+# Client Side Data Fetching (/dashboard)
+1. Everytime you do not need prerendering . like for example if user wants to see his dashboard , his followers and all personal information then SEO is not important and we need to skip prerendering because it will not be same for every user.
+2. We will use normal useEffect() to fetch the data client side.
+![](images/img_32.png)
+
+(/dashboard-swr)
+For **Client Side Data Fetching** we normally use useEffect() to fetch the Data but nextjs suggests to use **SWR** library for data fetching it provide various facilities. (read to understand the working of SWR it's different than useEffect() ).
+
+
+# server side Pre-rendering and Client-side data fetching (/events)
+1. In this we first created a events page which  cconsists of 10 events of varoius categories.
+2. we pre-rendered the events page so , the client  got the pre-rendered HTML page from the server.
+3. Now we made a button which will fetch only sports events for filtering. this is done on client side.
+4. we did server side rendering because there we need SEO of the events and we do not want SEO of the events filtered by particular users .
+
+# shallow Routing
+5. Now on clicking the button let's say we want to chenge the url as well.b/c if he reloads all categories will be there even after clicking the button.
+6. Shallow routing is done to change the url without fetching any data. So that the data is locked by the url. if you share '/events?category=sports' url to anyone they will be able to open the page which has only sports category.
+7. Shallow routing allows you to change the URL without running data fetching methods again, that includes getServerSideProps , getStaticProps , and getInitialProps .
